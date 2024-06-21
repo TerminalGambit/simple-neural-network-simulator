@@ -1,3 +1,10 @@
+/* class BasicNeuron implements Neuron {
+    -inputValue: double
+    -outputValue: double
+    +fire(): void
+    +calculateOutput(): double
+} */
+
 class BasicNeuron implements Neuron {
     private double inputValue;
     private double outputValue;
