@@ -11,4 +11,10 @@ public class HiddenLayer extends Layer {
             neuron.fire();
         }
     }
+
+    public void backwardPass() {
+        for (Neuron neuron : neurons) {
+            neuron.calculateOutput();
+        }
+    }
 }

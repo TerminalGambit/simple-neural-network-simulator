@@ -5,6 +5,9 @@
     +calculateOutput(): double
 } */
 
+import java.util.List;
+import java.util.ArrayList;
+
 class BasicNeuron implements Neuron {
     private double inputValue;
     private double outputValue;
@@ -36,5 +39,25 @@ class BasicNeuron implements Neuron {
 
     public double getInputValue() {
         return inputValue;
+    }
+
+    public double getOutput() {
+        return outputValue;
+    }
+
+    public List<Double> getWeights() {
+        return null;
+    }
+
+    public double getBias() {
+        return 0;
+    }
+
+    public void setWeights(List<Double> weights) {
+        return;
+    }
+
+    public void setBias(double bias) {
+        return;
     }
 }

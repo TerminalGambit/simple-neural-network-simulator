@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Layer {
-    protected List<Neuron> neurons = new ArrayList<Neuron>();
-
-    public void addNeuron(Neuron neuron) {
-        neurons.add(neuron);
-    }
-
+    protected List<Neuron> neurons = new ArrayList<>();
     public abstract void forwardPass();
+    public abstract void backwardPass();
+    public List<Neuron> getNeurons() {
+        return neurons;
+    }
 }
