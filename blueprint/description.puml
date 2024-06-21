@@ -1,0 +1,48 @@
+@startuml
+skinparam style strictuml
+
+interface Neuron {
+    +fire(): void
+    +calculateOutput(): double
+}
+
+class BasicNeuron implements Neuron {
+    -inputValue: double
+    -outputValue: double
+    +fire(): void
+    +calculateOutput(): double
+}
+
+abstract class Layer {
+    #neurons: List<Neuron>
+    +addNeuron(neuron: Neuron): void
+    +forwardPass(): void
+}
+
+class InputLayer extends Layer {
+    +forwardPass(): void
+}
+
+class HiddenLayer extends Layer {
+    +forwardPass(): void
+}
+
+class OutputLayer extends Layer {
+    +forwardPass(): void
+}
+
+class Network {
+    -layers: List<Layer>
+    +addLayer(layer: Layer): void
+    +train(inputs: double[], targets: double[]): void
+    +calculateOutput(inputs: double[]): double[]
+}
+
+Neuron <|-- BasicNeuron
+Layer <|-- InputLayer
+Layer <|-- HiddenLayer
+Layer <|-- OutputLayer
+Layer "1" *-- "*" Neuron : contains >
+Network "1" *-- "*" Layer : contains >
+
+@enduml
