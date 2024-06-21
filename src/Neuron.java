@@ -6,9 +6,11 @@
 import java.util.List;
 
 public interface Neuron {
-    public void fire();
-    public double calculateOutput();
+    void fire();
+    double calculateOutput();
     double getOutput();
     List<Double> getWeights();
+    void setWeights(List<Double> weights);
     double getBias();
+    void setBias(double bias);
 }
