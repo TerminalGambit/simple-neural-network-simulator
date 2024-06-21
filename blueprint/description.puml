@@ -1,22 +1,33 @@
-@startuml
+@startuml NeuralNetwork
 skinparam style strictuml
 
 interface Neuron {
     +fire(): void
     +calculateOutput(): double
+    +getOutput(): double
+    +setInputValue(value: double): void
 }
 
 class BasicNeuron implements Neuron {
     -inputValue: double
     -outputValue: double
+    -weights: List<Double>
+    -bias: double
     +fire(): void
     +calculateOutput(): double
+    +getOutput(): double
+    +setInputValue(value: double): void
+    +setWeights(weights: List<Double>): void
+    +getWeights(): List<Double>
+    +setBias(bias: double): void
+    +getBias(): double
 }
 
 abstract class Layer {
     #neurons: List<Neuron>
     +addNeuron(neuron: Neuron): void
     +forwardPass(): void
+    +backwardPass(errorSignal: List<Double>): void
 }
 
 class InputLayer extends Layer {
@@ -25,10 +36,12 @@ class InputLayer extends Layer {
 
 class HiddenLayer extends Layer {
     +forwardPass(): void
+    +backwardPass(errorSignal: List<Double>): void
 }
 
 class OutputLayer extends Layer {
     +forwardPass(): void
+    +backwardPass(errorSignal: List<Double>): void
 }
 
 class Network {
@@ -36,6 +49,18 @@ class Network {
     +addLayer(layer: Layer): void
     +train(inputs: double[], targets: double[]): void
     +calculateOutput(inputs: double[]): double[]
+    +backPropagation(): void
+}
+
+class TrainingManager {
+    -network: Network
+    +train(dataSet: DataSet, epochs: int): void
+}
+
+class DataSet {
+    -data: List<Tuple<double[], double[]>>
+    +loadData(filePath: String): void
+    +getData(): List<Tuple<double[], double[]>>
 }
 
 Neuron <|-- BasicNeuron
@@ -44,5 +69,5 @@ Layer <|-- HiddenLayer
 Layer <|-- OutputLayer
 Layer "1" *-- "*" Neuron : contains >
 Network "1" *-- "*" Layer : contains >
-
+TrainingManager "1" *-- "1" Network : manages >
 @enduml
